@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>fe</title>
+</head>
+
+<body>
+    <div style="justify-content: center;display: flow-root; align-content: center;">
+        <p>Count of Guests</p><input id="NGuests" onchange="updateGuestList()">
+        <fieldset>
+            <legend>Fill Guests</legend>
+            <div id="GuestsList"></div>
+        </fieldset>
+
+        <fieldset>
+            <legend>Guests</legend>
+            <div id="Guests"></div>
+        </fieldset>
+</body>
+<script>
+    function updateGuestList() {
+        var myTableDiv = document.getElementById("GuestsList");
+        var fields = document.createElement('div');
+        fields.id = "dtable";
+        if (document.getElementById("dtable")) myTableDiv.removeChild(document.getElementById("dtable"));
+
+        for (var i = 0; i < parseInt(document.getElementById('NGuests').value, 10); i++) {
+            var inputarr = document.createElement('div');
+            inputarr.classList.add("name");
+            var firstName = document.createElement('input');
+            firstName.placeholder = "First Name"
+            var secondName = document.createElement('input');
+            secondName.placeholder = "Last Name"
+            inputarr.appendChild(firstName);
+            inputarr.appendChild(secondName);
+            fields.appendChild(inputarr);
+        }
+        myTableDiv.appendChild(fields);
+    };
+    document.getElementById("GuestsList").addEventListener('change', function() {
+        updateguests();
+    });
+
+    function updateguests() {
+        var myTableDiv = document.getElementById("Guests");
+        var fields = document.createElement('div');
+        fields.id = "list";
+        if (document.getElementById("list")) myTableDiv.removeChild(document.getElementById("list"));
+
+        var names = document.getElementsByClassName("name");
+        Array.prototype.forEach.call(names, function(element) {
+            var string;
+            var kids = element.childNodes;
+            if (kids[0].value != "" || kids[1].value != "") {
+                string = kids[0].value + " " + kids[1].value;
+                var p = document.createElement('p');
+                p.textContent = string;
+                fields.appendChild(p);
+            }
+        });
+        myTableDiv.appendChild(fields);
+    };
+</script>
+
+</html>
