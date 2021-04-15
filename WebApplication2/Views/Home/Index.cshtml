@@ -1,0 +1,17 @@
+﻿@using WebApplication2.Models
+@model List<Contact>
+@{
+    ViewBag.Title = "Home Page";
+}
+
+<div class="jumbotron">
+    @foreach (Contact contact in ViewBag.contacts)
+    {
+        <p>Name:@contact.Name</p>
+        foreach (Phone phone in contact.Phones)
+        {
+            <p>Phone:@phone.PhoneNumber</p>
+            <p>isActive: @(phone.isActive? "isActive":"isnotActive")</p>
+        }
+    }
+</div>
